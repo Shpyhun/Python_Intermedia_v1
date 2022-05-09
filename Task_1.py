@@ -17,4 +17,24 @@
 
 
 class Fraction:
-    pass
+
+    # instantiation
+    def __init__(self, num: int, den: int) -> None:
+        self.__num = num    # numerator
+        self.__den = den    # denominator
+
+    # subtraction
+    def __sub__(self, other) -> None:
+        pass
+
+    # addition
+    def __add__(self, other) -> None:
+        pass
+
+    # multiplication
+    def __mul__(self, other) -> None:
+        pass
+
+    # division
+    def __truediv__(self, other) -> None:
+        pass
