@@ -20,57 +20,57 @@ class Fraction:
 
     # instantiation
     def __init__(self, num: int, den: int) -> None:
-        self.num = num    # numerator
-        self.den = den    # denominator
+        self.__num = num  # numerator
+        self.__den = den  # denominator
 
     # subtraction
     def __sub__(self, other_sub):
-        # if type(other_sub) == int:
-        if type(other_sub) == type(self):
-            if self.den == other_sub.den:
-                new_num = self.num * other_sub.den - self.den * other_sub.num
-                new_den = self.den * other_sub.den
-                return Fraction(new_num, new_den)
-            else:
-                new_num = self.num - other_sub.num
-                new_den = self.den
-                return Fraction(new_num, new_den)
-        raise TypeError('Must be int')
+        if self.__num == other_sub.__num:       # TODO не выполняется проверка равенства знаменателей
+            new_num = self.__num * other_sub.__den - self.__den * other_sub.__num
+            new_den = self.__den * other_sub.__den
+            return Fraction(new_num, new_den)
+        else:
+            new_num = self.__num - other_sub.__num
+            new_den = self.__den
+            return Fraction(new_num, new_den)
 
     # addition
     def __add__(self, other_add):
-        if type(other_add) == type(self):
-            if self.den == other_add.den:
-                new_num = self.num*other_add.den + self.den*other_add.num
-                new_den = self.den * other_add.den
-                return Fraction(new_num, new_den)
-            else:
-                new_num = self.num + other_add.num
-                new_den = self.den
-                return Fraction(new_num, new_den)
-        raise TypeError('Must be int')
+        if self.__den == other_add.__den:    # TODO не выполняется проверка равенства знаменателей
+            new_num = self.__num * other_add.__den + self.__den * other_add.__num
+            new_den = self.__den * other_add.__den
+            return Fraction(new_num, new_den)
+        if self.__den != other_add.__den:
+            new_num = self.__num + other_add.__num
+            new_den = self.__den
+            return Fraction(new_num, new_den)
 
     # multiplication
     def __mul__(self, other_mul):
-        return Fraction(self.num * other_mul.num, self.den * other_mul.den)
+        return Fraction(self.__num * other_mul.__num, self.__den * other_mul.__den)
 
     # division
     def __truediv__(self, other_div):
-        return Fraction(self.num / other_div.num, self.den / other_div.den)
+        return Fraction(self.__num * other_div.__den, self.__den * other_div.__num)
+
+    def __str__(self) -> str:
+        return f"{self.__num}/{self.__den}"
+        # return str(self.__num) + "/" + str(self.__den)
 
 
-p1 = Fraction(2, 2)
-p2 = Fraction(2, 5)
+p1 = Fraction(1, 2)
+
+p2 = Fraction(2, 2)
 
 sub = p1 - p2
 add = p1 + p2
-mul = p1 + p2
+mul = p1 * p2
 div = p1 / p2
 
-
-print(p1)
-print(p2)
-print(sub)
-print(add)
-print(mul)
-print(div)
+print("\nFirst fraction:", p1)
+print("Second fraction:", p2, "\n")
+print("Result of subtracting fractions:", sub, "\n")
+print("Result of adding fractions:", add, "\n")
+print("Result of multiplying fractions:", mul, "\n")
+print("Result of dividing fractions:", div)
+# print()
