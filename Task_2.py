@@ -10,4 +10,33 @@
 
 
 class Point2D:
-    pass
+
+    __points_count = 0
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        Point2D.__points_count += 1
+
+    @staticmethod
+    def distance(point_1, point_2):
+        return ((point_1.x - point_2.x) ** 2 + (point_1.y - point_2.y) ** 2) ** 0.5
+
+    @classmethod
+    def point_count(cls):
+        return cls.__points_count
+
+
+class Point3D(Point2D):
+    def __init__(self, x, y, z):
+        super().__init__(x, y)
+        self.z = z
+
+
+p1 = Point2D(10, 10)
+print(Point2D.point_count())
+p2 = Point3D(100, 100, 100)
+
+print(Point2D.distance(p1, p2))
+print(Point2D.point_count())
+
