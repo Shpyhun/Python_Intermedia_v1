@@ -32,11 +32,21 @@ class Point3D(Point2D):
         super().__init__(x, y)
         self.z = z
 
+    @staticmethod
+    def distance(point_3, point_4):
+        return ((point_3.x - point_4.x) ** 2 + (point_3.y - point_4.y) ** 2 + (point_3.z - point_4.z)) ** 0.5
+
 
 p1 = Point2D(10, 10)
 print(Point2D.point_count())
-p2 = Point3D(100, 100, 100)
+p2 = Point2D(100, 100)
 
 print(Point2D.distance(p1, p2))
 print(Point2D.point_count())
 
+p3 = Point3D(10, 10, 10)
+print(Point2D.point_count())
+p4 = Point3D(100, 100, 100)
+
+print(Point3D.distance(p3, p4))
+print(Point3D.point_count())
