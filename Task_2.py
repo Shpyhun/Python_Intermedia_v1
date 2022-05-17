@@ -38,15 +38,15 @@ class Point3D(Point2D):
 
 
 p1 = Point2D(10, 10)
-print(Point2D.point_count())
+print("\nCounter class instance:", Point2D.point_count())
 p2 = Point2D(100, 100)
 
-print(Point2D.distance(p1, p2))
-print(Point2D.point_count())
+print("Distance between points on a plane:", round(Point2D.distance(p1, p2), 2))
+print("Counter class instance:", Point2D.point_count())
 
 p3 = Point3D(10, 10, 10)
-print(Point2D.point_count())
+print("Counter class instance:", Point2D.point_count())
 p4 = Point3D(100, 100, 100)
 
-print(Point3D.distance(p3, p4))
-print(Point3D.point_count())
+print("Distance between points on a plane:", round(Point3D.distance(p3, p4), 2))
+print("Counter class instance:", Point3D.point_count())
