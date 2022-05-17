@@ -155,11 +155,11 @@ div = fr1 / fr2
 
 print("\nFirst fraction:", fr1)
 print("Second fraction:", fr2)
-print("Result of subtracting fractions:", sub)
+print("\nResult of subtracting fractions:", sub)
 print("Result of adding fractions:", add)
 print("Result of multiplying fractions:", mul)
 print("Result of dividing fractions:", div)
-print("Result subtracting fractions (mixin):", Fraction.sub(fr1, fr2))
+print("\nResult subtracting fractions (mixin):", Fraction.sub(fr1, fr2))
 print("Result adding fractions (mixin):", Fraction.add(fr1, fr2))
 print("Result multiplying fractions (mixin):", FractionMixin.mul(fr1, fr2))
 print("Result dividing fractions (mixin):", FractionMixin.div(fr1, fr2))
