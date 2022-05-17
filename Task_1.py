@@ -17,7 +17,7 @@
 
 
 class FractionMixin:
-    """Multipying fractions and returns a fraction"""
+    """Multiplying fractions and returns a fraction"""
 
     @staticmethod
     def add(fraction_1, fraction_2):
@@ -58,34 +58,56 @@ class Fraction(FractionMixin):
 
     # instantiation
     def __init__(self, num: int, den: int) -> None:
-        self.__num = num  # numerator
+        self.num = num  # numerator
         self.den = den  # denominator
+        self.conv_fraction()
 
     @property
     def num(self) -> int:
-        """Return int"""
+        """Return numerator"""
         return self.__num
 
     @property
     def den(self) -> int:
-        """Return int"""
+        """Return denominator"""
         return self.__den
 
     @den.setter
     def den(self, den) -> None:
+        """Checks the value of the denominator and sets the attribute value"""
         if den == 0:
             raise Exception("Denominator can't be a zero")
         self.__den = den
+
+    @num.setter
+    def num(self, num) -> None:
+        """Sets the attribute value"""
+        self.__num = num
+
+    @staticmethod
+    def gcd(numer, denom) -> int:
+        """Finds and returns the greatest common denominator"""
+        res = numer % denom
+        while res != 0:
+            numer, denom = denom, res
+            res = numer % denom
+        return denom
+
+    def conv_fraction(self) -> None:
+        """Converts a fraction like 2/4 to 1/2"""
+        nod = Fraction.gcd(self.num, self.den)
+        self.num //= nod
+        self.den //= nod
 
     # subtraction
     def __sub__(self, other_sub):
         """Subtracts fractions and returns a fraction"""
         if self.den != other_sub.den:
-            new_num = self.__num * other_sub.den - self.den * other_sub.__num
+            new_num = self.num * other_sub.den - self.den * other_sub.num
             new_den = self.den * other_sub.den
             return Fraction(new_num, new_den)
         else:
-            new_num = self.__num - other_sub.__num
+            new_num = self.num - other_sub.num
             new_den = self.den
             return Fraction(new_num, new_den)
 
@@ -93,37 +115,38 @@ class Fraction(FractionMixin):
     def __add__(self, other_add):
         """Adds fractions and returns a fraction"""
         if self.den != other_add.den:
-            new_num = self.__num * other_add.den + self.den * other_add.__num
+            new_num = self.num * other_add.den + self.den * other_add.num
             new_den = self.den * other_add.den
             return Fraction(new_num, new_den)
         else:
-            new_num = self.__num + other_add.__num
+            new_num = self.num + other_add.num
             new_den = self.den
             return Fraction(new_num, new_den)
 
     # multiplication
     def __mul__(self, other_mul):
-        """Multiplays fractions and returns a fraction"""
-        return Fraction(self.__num * other_mul.__num, self.den * other_mul.den)
+        """Multiplying fractions and returns a fraction"""
+        return Fraction(self.num * other_mul.num, self.den * other_mul.den)
 
     # division
     def __truediv__(self, other_div):
         """Dividing fractions and returns a fraction"""
-        return Fraction(self.__num * other_div.den, self.den * other_div.__num)
+        return Fraction(self.num * other_div.den, self.den * other_div.num)
 
     def __str__(self) -> str:
-        return f"{self.__num}/{self.den}"
+        """Return a string object"""
+        return f"{self.num}/{self.den}"
 
     @classmethod
     def change_str(cls, str_fraction):
-        """Change string to fraction"""
+        """Changes string to fraction"""
         num, den = map(int, str_fraction.split('/'))
         return cls(num, den)
 
 
-fr1 = Fraction(1, 2)
+fr1 = Fraction(2, 3)
 
-fr2 = Fraction.change_str('2/3')
+fr2 = Fraction.change_str('3/4')
 
 sub = fr1 - fr2
 add = fr1 + fr2
