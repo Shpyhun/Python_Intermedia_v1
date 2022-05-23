@@ -21,22 +21,18 @@ class FormulaError(Exception):
     pass
 
 
-def calculator(form_str: str):
+def calculator(form_str: str) -> float:
     """Returns the result of the operation"""
     form_str = form_str.split()
     if len(form_str) != 3:
         raise FormulaError("Formula entered incorrectly")
+    if form_str[1] not in "+-*/":
+        raise FormulaError("Operator entered incorrectly")
     try:
         form_str[0] = float(form_str[0])
         form_str[2] = float(form_str[2])
-    except ValueError:                                      # TODO отловить ошибку ввода str
-        print("Values entered incorrectly")
-    except FormulaError:
-        print("Values entry error")
-    try:
-        form_str[1] not in "+-*/"                           # TODO  отловить ошибку ввода оператора
-    except ValueError:
-        print("Formula entered incorrectly")
+    except (ValueError, TypeError):
+        raise FormulaError("Values entered incorrectly")
     else:
         if form_str[1] == "+":
             return form_str[0] + form_str[2]
@@ -49,11 +45,9 @@ def calculator(form_str: str):
                 form_str[2] != 0
                 return form_str[0] / form_str[2]
             except ZeroDivisionError:
-                return "Divider can't be a zero"
-    return form_str
+                raise FormulaError("Divider can't be a zero")
 
 
-calc = "1 / /1"
+calc = "1 / 1"
 
 print(calculator(calc))
-# print(str_num)
