@@ -15,23 +15,45 @@ c) Если второе значение ввода не является '+', 
 """
 
 
-def calculator(str_calc: str):
-    if len(str_calc.split()) != 3:
-        return "FormulaError"
-    num_1, oper, num_2 = str_calc.split()
+# Define own exception
+class FormulaError(Exception):
+    """An exception is thrown due to a formula input error"""
+    pass
+
+
+def calculator(form_str: str):
+    """Returns the result of the operation"""
+    form_str = form_str.split()
+    if len(form_str) != 3:
+        raise FormulaError("Formula entered incorrectly")
     try:
-        num_1 = float(num_1)
-        num_2 = float(num_2)
+        form_str[0] = float(form_str[0])
+        form_str[2] = float(form_str[2])
+    except ValueError:                                      # TODO отловить ошибку ввода str
+        print("Values entered incorrectly")
+    except FormulaError:
+        print("Values entry error")
+    try:
+        form_str[1] not in "+-*/"                           # TODO  отловить ошибку ввода оператора
     except ValueError:
-        return "FormulaError"
-    if oper not in "+-*/":
-        return "FormulaError"
+        print("Formula entered incorrectly")
+    else:
+        if form_str[1] == "+":
+            return form_str[0] + form_str[2]
+        elif form_str[1] == "-":
+            return form_str[0] - form_str[2]
+        elif form_str[1] == "*":
+            return form_str[0] * form_str[2]
+        elif form_str[1] == "/":
+            try:
+                form_str[2] != 0
+                return form_str[0] / form_str[2]
+            except ZeroDivisionError:
+                return "Divider can't be a zero"
+    return form_str
 
-    # if num_2 == None:
-    return num_1, oper, num_2
 
-
-
-calc = "11 + 22"
+calc = "1 / /1"
 
 print(calculator(calc))
+# print(str_num)
