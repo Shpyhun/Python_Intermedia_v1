@@ -13,3 +13,25 @@
 
 def fib_generator():
     pass
+
+
+def fib_list(n: int):
+    if type(n) != int:              # TODO catch the exception input not int
+    # if not isinstance(n, int):
+        raise ValueError('"n" must be int')
+    if n <= 0:
+        raise ValueError('"n" can\'t be <= 0')
+    if n == 1:
+        return [0]
+    fib = [0, 1] + [0] * (n - 2)
+    for i in range(2, n):
+        fib[i] = fib[i - 1] + fib[i - 2]
+    return fib
+
+
+n = int(input("Enter the amount of elements in the Fibonacci sequence: "))
+gen = fib_list(n)
+
+print(gen)
+# for i in gen:
+#     print(i, end=' ')
