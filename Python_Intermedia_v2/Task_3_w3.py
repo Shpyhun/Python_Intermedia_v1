@@ -11,23 +11,33 @@
 """
 
 
-def fib_generator():
-    pass
+def fib_generator(n: int):
+    """Iterates over the elements of a sequence Fibonacci"""
+    num_fib_1 = 0
+    num_fib_2 = 1
+    if n <= 0:
+        raise ValueError('"n" can\'t be <= 0')
+    for i in range(n):
+        yield num_fib_1
+        num_fib_1, num_fib_2 = num_fib_2, num_fib_1 + num_fib_2
 
 
-def fib_list(n: int):
+def fib_list(n: int) -> list:
+    """Returns a list with the elements of a sequence Fibonacci"""
     if n <= 0:
         raise ValueError('"n" can\'t be <= 0')
     if n == 1:
         return [0]
-    fib = [0, 1] + [0] * (n - 2)
+    fib = [0, 1] + [0] * (n - 2)  # reserve memory
     for i in range(2, n):
         fib[i] = fib[i - 1] + fib[i - 2]
     return fib
 
 
-gen = fib_list(10)
+fib_gen = fib_generator(10)
+gen_l = fib_list(10)
 
-print(gen)
-# for i in gen:
-#     print(i, end=' ')
+print("\nIterates over the elements of a sequence Fibonacci: ", end='')
+for i in fib_gen:
+    print(i, end=' ')
+print("\n\nList with the elements of a sequence Fibonacci:", gen_l)
