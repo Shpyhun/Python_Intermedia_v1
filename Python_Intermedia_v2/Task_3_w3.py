@@ -16,9 +16,6 @@ def fib_generator():
 
 
 def fib_list(n: int):
-    if type(n) != int:              # TODO catch the exception input not int
-    # if not isinstance(n, int):
-        raise ValueError('"n" must be int')
     if n <= 0:
         raise ValueError('"n" can\'t be <= 0')
     if n == 1:
@@ -29,8 +26,7 @@ def fib_list(n: int):
     return fib
 
 
-n = int(input("Enter the amount of elements in the Fibonacci sequence: "))
-gen = fib_list(n)
+gen = fib_list(10)
 
 print(gen)
 # for i in gen:
