@@ -9,11 +9,9 @@ def sentence_without_punctuation(sentence):
 
 def word_list(sentence):
     """Returns a list of words from a sentence"""
-    words_list = [sign for sign in sentence.split()]
-    return words_list
+    return sentence_without_punctuation(sentence).split()
 
 
 def longest_word(sentence):
     """Returns the longest word in a sentence"""
-    words_list = [sign for sign in sentence.split()]
-    return max(words_list, key=len)
+    return max(word_list(sentence), key=len)

@@ -9,7 +9,7 @@
 import word_utils as wu
 
 # sentence = input("Enter a sentence: ")
-sentence = 'I thought the King had more affected the Duke of Albany than Cornwall.'
+sentence = 'I thought, the King had more! affected the Duke of Albany than <Cornwall>.'
 
 
 print("\nA sentence without punctuation: ", wu.sentence_without_punctuation(sentence))
